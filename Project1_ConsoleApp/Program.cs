@@ -102,12 +102,12 @@ class Program
         return stats;
     }
 
-        /*
-        Recursive function for sequential search
-        For each directory, go through and count files/folders
-        Do for each subdirectory 
-        */
-        static void sequentialDirSearch(DirectoryInfo directory, ref Stats stats) {
+    /*
+    Recursive function for sequential search
+    For each directory, go through and count files/folders
+    Do for each subdirectory 
+    */
+    static void sequentialDirSearch(DirectoryInfo directory, ref Stats stats) {
         try {
             stats.FolderCount++;
             
@@ -165,6 +165,9 @@ class Program
         return allStats;
     }
 
+    /*
+    Identifies an image file 
+    */
     static bool isImageFile(FileInfo file) {
         string[] imageExtensions = { ".png", ".jpg", ".jpeg", ".gif", ".bmp" };
         return imageExtensions.Contains(file.Extension.ToLower());
