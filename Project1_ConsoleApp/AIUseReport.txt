@@ -1,0 +1,9 @@
+Generative AI Use Report: 
+
+- use of Concurrent Bag in parallel search 
+    In my parellel search function, I am using a ConcurrentBag and ConcurrentQueue to keep track of thread results, 
+    I got this from Chat GPT as I was struggling implementing a priority queue like described in class. 
+    The AI also therefore modified my parallel for each loop since it needed to add the use of the concurrent queue 
+
+- Identifying an Image file
+    I use a small function to identify if  a file is an image that I got from AI, since I couldn't figure out how to do this nicely. 
