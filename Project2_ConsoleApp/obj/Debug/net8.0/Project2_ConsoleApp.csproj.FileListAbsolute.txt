@@ -1,0 +1,15 @@
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/bin/Debug/net8.0/Project2_ConsoleApp
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/bin/Debug/net8.0/Project2_ConsoleApp.deps.json
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/bin/Debug/net8.0/Project2_ConsoleApp.runtimeconfig.json
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/bin/Debug/net8.0/Project2_ConsoleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/bin/Debug/net8.0/Project2_ConsoleApp.pdb
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.AssemblyInfoInputs.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.AssemblyInfo.cs
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.csproj.CoreCompileInputs.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.sourcelink.json
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/refint/Project2_ConsoleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.pdb
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/Project2_ConsoleApp.genruntimeconfig.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/Debug/net8.0/ref/Project2_ConsoleApp.dll
