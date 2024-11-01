@@ -8,20 +8,23 @@ Date: 10/28/24
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 /*
 TODO: 
-
-Stopwatch 
 print counts in order 
 
 */
+
+/*
+Main Program functionality to handle prime/odd generation 
+*/
 class Program {
     
+    // Main program that handles input processing 
     static void Main(string[] args) {
         try {
             if (args.Length < 2 ) {
@@ -46,43 +49,71 @@ class Program {
             if (!int.TryParse(args[2], out count) || count < 1) 
                 throw new ArgumentException("'count' must be a positive integer.");
         }
-        Console.Write("BitLength: "+ bits + " bits\n");
 
-            if (option == "prime")
+            if (option == "prime") {
+                Console.Write("BitLength: "+ bits + " bits");
                 GeneratePrimes(bits, count);
-            else
-                GenerateOddFactors(bits, count);
+            }
+
+            else {
+                Console.Write("BitLength: "+ bits + " bits\n");
+                GenerateOddNumber(bits, count);
+            }
         }
         
         catch (ArgumentException ex) { 
             Console.WriteLine(ex.Message); 
         }
     }
+    
+    // Handles generation of prime numbers
 
-    // Method to generate prime numbers
     static void GeneratePrimes(int bits, int count) {
-        var primes = new ConcurrentBag<BigInteger>();
-        Parallel.For(0, count, i =>  {
-            BigInteger num;
-            do 
-                num = Extensions.GenerateRandomBigInteger(bits);
-            while (!num.IsProbablyPrime());
+        string[] results = new string[count];
+        var stopwatch = Stopwatch.StartNew();
 
-            primes.Add(num);
-            Console.WriteLine("Prime: " + num);
+        Parallel.ForEach(Enumerable.Range(0, count), i => {
+            BigInteger num;
+            using (var rng = RandomNumberGenerator.Create()) {
+                do 
+                    num = Extensions.GenerateRandomBigInteger(bits);
+                while (!num.IsProbablyPrime());
+            }
+            results[i] = $"\n{i + 1}: {num}";
         });
+
+        stopwatch.Stop();
+
+        foreach (var result in results)
+            Console.WriteLine(result);
+
+        Console.WriteLine($"Time to Generate: {stopwatch.Elapsed}\n");
     }
 
-    // Method to generate odd numbers and their factors
-    static void GenerateOddFactors(int bits, int count)  {
+    // Generate odd numbers and get their factors 
+    static void GenerateOddNumber(int bits, int count)  {
+        var stopwatch = Stopwatch.StartNew(); 
+        string[] results = new string[count]; 
+
         Parallel.For(0, count, i =>  {
             
-            BigInteger number = Extensions.GenerateRandomBigInteger(bits) | 1; // Ensure number is odd
+            //  makes sure number is odd
+            BigInteger number = Extensions.GenerateRandomBigInteger(bits) | 1; 
             var factors = GetFactors(number);
-            Console.Write("Odd Number: "+ number + "\n");
-            Console.Write("Number of factors: " + factors.Count() + "\n");
+            
+            results[i] = $"{i + 1}: {number}\nNumber of factors: {factors.Count}";
+
         });
+
+        stopwatch.Stop(); 
+
+        foreach (var result in results) 
+            Console.WriteLine(result);
+
+        Console.WriteLine($"Time to Generate: {stopwatch.Elapsed}\n");
+
     }
+
 
 
     // Find all factors of a number
@@ -104,17 +135,16 @@ class Program {
     }
 }
 
-// Extension method to get bit length of BigInteger for generating random numbers with appropriate size
-public static class Extensions
-{
-    public static int GetBitLength(this BigInteger value)
-    {
+// Extension class to contain Miller-Rabin algorithm for getting primes and helper functions
+public static class Extensions {
+
+    //Get the length of a btit 
+    public static int GetBitLength(this BigInteger value) {
         byte[] bytes = value.ToByteArray();
         int bitLength = (bytes.Length - 1) * 8;
         int lastByte = bytes[^1];
 
-        while (lastByte > 0)
-        {
+        while (lastByte > 0) {
             bitLength++;
             lastByte >>= 1;
         }
@@ -122,9 +152,8 @@ public static class Extensions
     }
 
 
-    // Extension method to check if a BigInteger is probably prime using Miller-Rabin
-    public static bool IsProbablyPrime(this BigInteger value, int k = 10)
-    {
+    // Check if a BigInteger is probably prime using Miller-Rabin
+    public static bool IsProbablyPrime(this BigInteger value, int k = 10) {
         if (value < 2) 
             return false;
 
@@ -145,10 +174,12 @@ public static class Extensions
         for (int i = 0; i < k; i++) {
             BigInteger a = GenerateRandomBigInteger((int) value.GetBitLength() - 1) % (value - 2) + 2;
             BigInteger x = BigInteger.ModPow(a, d, value);
+
             if (x == 1 || x == value - 1)
                 continue;
 
             bool composite = true;
+
             for (int r = 1; r < s; r++) {
                 x = BigInteger.ModPow(x, 2, value);
                 if (x == value - 1) {
@@ -166,18 +197,16 @@ public static class Extensions
 
     
     // Helper method to generate a random BigInteger
-    public static BigInteger GenerateRandomBigInteger(int bits)
-    {
+    public static BigInteger GenerateRandomBigInteger(int bits) {
         byte[] bytes = new byte[bits / 8];
-        using (var rng = RandomNumberGenerator.Create())
-        {
-            rng.GetBytes(bytes);
-        }
+        using (var random_num_gen = RandomNumberGenerator.Create())
+            random_num_gen.GetBytes(bytes);
+        
         return new BigInteger(bytes, isUnsigned: true);
     }
 
 
-    // Helper method to calculate the integer square root of a BigInteger
+    // calculate the integer square root of a BigInteger
     public static BigInteger Sqrt(BigInteger value) {
         if (value < 0) 
             throw new ArgumentException("Negative argument.");

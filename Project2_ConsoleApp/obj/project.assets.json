@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/Project2_ConsoleApp.csproj",
-      "projectName": "Project2_ConsoleApp",
-      "projectPath": "/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/Project2_ConsoleApp.csproj",
+      "projectUniqueName": "/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/NumGen.csproj",
+      "projectName": "NumGen",
+      "projectPath": "/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/NumGen.csproj",
       "packagesPath": "/Users/Milana/.nuget/packages/",
       "outputPath": "/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project2_ConsoleApp/obj/",
       "projectStyle": "PackageReference",

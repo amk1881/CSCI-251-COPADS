@@ -1,0 +1,14 @@
+Used AI to help in generating the square root of a big integer, this was really
+tripping me up an causing me to get wrong answers. This was used to help me get the 
+factors of a number
+
+I also used AI to help me get the factors of a number, while I was using a similar 
+method before, I had some formatting issues with using the BigInteger class that I 
+did not anticipate. 
+
+I also used AI to help me figure out what/why the extensions class was necesary 
+as it was mentioned to use for the isPossiblyPrime method (since it had 'this' keyword). 
+
+I also used AI to help me list ways I could make my prime generation faster. It told 
+me to switch out my parallel for loop for a for each loop, also to stop using a concurrent bag 
+like I was and to instead use a list to store results. 
