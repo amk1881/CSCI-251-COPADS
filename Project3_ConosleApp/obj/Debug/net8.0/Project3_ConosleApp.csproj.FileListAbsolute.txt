@@ -1,0 +1,15 @@
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/Project3_ConosleApp
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/Project3_ConosleApp.deps.json
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/Project3_ConosleApp.runtimeconfig.json
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/Project3_ConosleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/Project3_ConosleApp.pdb
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.AssemblyInfoInputs.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.AssemblyInfo.cs
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.csproj.CoreCompileInputs.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.sourcelink.json
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/refint/Project3_ConosleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.pdb
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.genruntimeconfig.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/ref/Project3_ConosleApp.dll
