@@ -33,7 +33,7 @@ class Program {
             string option = args[0];
             //check valid option input 
             if (option != "cipher" && option != "GenerateKeystream" && option != "Encrypt" && 
-                option != "Decrypt" && option != "MutlipleBits" && option != "EncryptImage" && option != "DecryptImage" ) 
+                option != "Decrypt" && option != "MultipleBits" && option != "EncryptImage" && option != "DecryptImage" ) 
                 
                 throw new ArgumentException("'option' must be a valid argument.");
                 
@@ -68,6 +68,16 @@ class Program {
                         throw new ArgumentException("Usage for 'Decrypt': Decrypt <ciphertext>\n");
                     string ciphertext = args[1];
                     Decrypt(ciphertext);
+                    break;
+
+                case "MultipleBits":
+                    if (args.Length != 5)
+                        throw new ArgumentException("Usage for 'MultipleBits': MultipleBits <seed> <tap> <steps> <iteration> \n");
+                    string mb_seed = args[1];
+                    int mb_tap = int.Parse(args[2]);
+                    int mb_steps = int.Parse(args[3]);
+                    int iteration = int.Parse(args[4]);
+                    MultipleBits(mb_seed, mb_tap, mb_steps, iteration);
                     break;
 
                 // Other cases will be implemented later.
@@ -267,5 +277,18 @@ class Program {
         // Output the plaintext
         Console.WriteLine($"The plaintext is: {plaintext}");
     }
+
+    /**
+    This option will accept an initial seed, tap, step - a positive integer 
+    (let’s say p) and perform ‘p’ steps of the LFSR cipher simulation. It will also accept iteration- a positive 
+    integer (let’s say w). After each iteration i (0 ≤ i <w), it returns a new seed, and accumulated integer 
+    value.  
+    At each step, it performs the cipher simulation; gets the recent rightmost bit and performs an 
+    arithmetic with this bit value. 
+    */
+     static void MultipleBits(string seed, int tap, int steps, int iteration){
+
+     }
+
 
 }
