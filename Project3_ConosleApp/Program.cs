@@ -12,7 +12,6 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 
 // TODO 
-// Decrypt longer version wrong 
 
 /*
 Main Program functionality to handle prime/odd generation 
@@ -252,7 +251,7 @@ class Program {
             }
             int overflowCount = longer.Length - shorter.Length; 
             string overflowBits = longer.Substring(0, overflowCount );
-            ciphertext += overflowBits; 
+            plaintext += overflowBits; 
             string remainingBits = longer.Substring(overflowCount );
 
                 // Encrypt the plaintext using XOR
