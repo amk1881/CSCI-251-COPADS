@@ -104,7 +104,7 @@ class Program {
 
         // Ensure the seed contains only 0s and 1s
         if (!IsBinaryString(seed))
-            throw new ArgumentException("Seed must be a binary string (only 0s and 1s).");
+            throw new ArgumentException("Seed must be a binary string");
 
         // XOR the bit at the tap position with the leftmost bit
         char newBit = (seed[0] == seed[tap] ? '0' : '1');
@@ -112,7 +112,7 @@ class Program {
         // Shift left and append the new bit
         string newSeed = seed.Substring(1) + newBit;
 
-        Console.WriteLine($"{seed}-seed");
+        Console.WriteLine($"{seed} - seed");
         Console.WriteLine($"{newSeed}   {newBit}");
     }
 
@@ -127,7 +127,7 @@ class Program {
             throw new ArgumentException("Number of steps must be a positive integer.");
 
         if (!IsBinaryString(seed))
-            throw new ArgumentException("Seed must be a binary string (only 0s and 1s).");
+            throw new ArgumentException("Seed must be a binary string ");
 
         string currentSeed = seed; 
         string keystream = "";    
@@ -165,18 +165,18 @@ class Program {
 //retrieved keystream from the file; and return a set of encrypted bits (ciphertext).
     static void Encrypt(string plaintext) {
     if (!IsBinaryString(plaintext))
-        throw new ArgumentException("Plaintext must be a binary string (only 0s and 1s).");
+        throw new ArgumentException("Plaintext must be a binary string");
 
     // Read the keystream from the file
     string keystreamPath = "keystream.txt";
     if (!System.IO.File.Exists(keystreamPath))
-        throw new FileNotFoundException("Keystream file not found. Generate it first using 'GenerateKeystream'.");
+        throw new FileNotFoundException("Keystream file not found. generate it using 'GenerateKeystream'.");
 
     string keystream = System.IO.File.ReadAllText(keystreamPath).Trim();
 
     // Validate the keystream
     if (!IsBinaryString(keystream))
-        throw new ArgumentException("Keystream in the file must be a binary string (only 0s and 1s).");
+        throw new ArgumentException("Keystream in the file must be a binary string");
 
     string ciphertext = "";
     string longer = "";
@@ -224,18 +224,18 @@ class Program {
     {
         // Validate the ciphertext
         if (!IsBinaryString(ciphertext))
-            throw new ArgumentException("Ciphertext must be a binary string (only 0s and 1s).");
+            throw new ArgumentException("Ciphertext must be a binary string");
 
         // Read the keystream from the file
         string keystreamPath = "keystream.txt";
         if (!System.IO.File.Exists(keystreamPath))
-            throw new FileNotFoundException("Keystream file not found. Generate it first using 'GenerateKeystream'.");
+            throw new FileNotFoundException("Keystream file not found. generate it using 'GenerateKeystream'");
 
         string keystream = System.IO.File.ReadAllText(keystreamPath).Trim();
 
         // Validate the keystream
         if (!IsBinaryString(keystream))
-            throw new ArgumentException("Keystream in the file must be a binary string (only 0s and 1s).");
+            throw new ArgumentException("Keystream in the file must be a binary string");
 
             
         string plaintext = "";
@@ -286,9 +286,43 @@ class Program {
     At each step, it performs the cipher simulation; gets the recent rightmost bit and performs an 
     arithmetic with this bit value. 
     */
-     static void MultipleBits(string seed, int tap, int steps, int iteration){
+     static void MultipleBits(string seed, int tap, int step, int iteration) {
+        // Validate inputs
+        if (!IsBinaryString(seed))
+            throw new ArgumentException("Seed must be a binary string");
+        if (tap <= 0)
+            throw new ArgumentException("Tap must be a positive integer");
+        if (step <= 0)
+            throw new ArgumentException("Step must be a positive integer");
+        if (iteration <= 0)
+            throw new ArgumentException("Iteration must be a positive integer");
 
-     }
+        Console.WriteLine($"{seed} - seed");
+
+        for (int i = 0; i < iteration; i++) { // #iteraitons 
+            string currentSeed = seed;
+            int accumulatedValue = 0;
+
+            // Perform 'step' LFSR simulations
+            for (int j = 0; j < step; j++) {
+                // get new bit 
+                int tapIndex = seed.Length - tap; 
+                char tapBit = currentSeed[tapIndex];
+                char newBit = (currentSeed[0] == tapBit) ? '0' : '1'; // XOR operation
+
+                currentSeed = currentSeed.Substring(1) + newBit;    // update 
+
+                char rightmostBit = currentSeed[^1];
+
+                accumulatedValue = (accumulatedValue * 2) + (rightmostBit - '0'); // Multiply by 2, add bit value
+            }
+
+            Console.WriteLine($"{currentSeed}  {accumulatedValue}");
+            // Update seed for the next iteration
+            seed = currentSeed;
+        }
+}
+
 
 
 }
