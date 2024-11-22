@@ -1,0 +1,7 @@
+
+I used AI in the decryptImage function to change the file name so that the ending 'ENCRYPTED' that was 
+added during encryption would not be part of the new output file name 
+
+Also for help using the SK library. I have never used this before so I had some trouble reindexing all the pixels 
+back into their correct spot after encryption/decryption. And for generating the random bytes used here. 
+

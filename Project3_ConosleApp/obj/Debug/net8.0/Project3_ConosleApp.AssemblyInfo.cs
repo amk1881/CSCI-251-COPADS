@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Project3_ConosleApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1dba4871136b747d813a700170bbb9cac2edbe9b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d64bbdb29468703df6bb7d10bdc6503f965a12e0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Project3_ConosleApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Project3_ConosleApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

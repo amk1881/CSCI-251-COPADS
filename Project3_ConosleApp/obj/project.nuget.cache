@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "r8zmGVGtkQE=",
+  "dgSpecHash": "TiEAV7EVbfU=",
   "success": true,
   "projectFilePath": "/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/Project3_ConosleApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/Milana/.nuget/packages/skiasharp/2.88.9/skiasharp.2.88.9.nupkg.sha512",
+    "/Users/Milana/.nuget/packages/skiasharp.nativeassets.macos/2.88.9/skiasharp.nativeassets.macos.2.88.9.nupkg.sha512",
+    "/Users/Milana/.nuget/packages/skiasharp.nativeassets.win32/2.88.9/skiasharp.nativeassets.win32.2.88.9.nupkg.sha512"
+  ],
   "logs": []
 }

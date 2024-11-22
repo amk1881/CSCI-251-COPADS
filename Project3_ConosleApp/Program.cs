@@ -6,12 +6,9 @@ Date: 11/20/24
 */
 
 using System;
-using System.Collections.Concurrent;
-using System.Numerics;
-using System.Security.Cryptography;
-using System.Diagnostics;
-
-// TODO 
+using System.Dynamic;
+using System.IO;
+using SkiaSharp;
 
 /*
 Main Program functionality to handle prime/odd generation 
@@ -78,6 +75,24 @@ class Program {
                     int mb_steps = int.Parse(args[3]);
                     int iteration = int.Parse(args[4]);
                     MultipleBits(mb_seed, mb_tap, mb_steps, iteration);
+                    break;
+
+                case "EncryptImage":
+                    if (args.Length != 4)
+                        throw new ArgumentException("Usage for 'EncryptImage': EncryptImage <imagefile> <seed> <tap>\n");
+                    string imagefile = args[1];
+                    string e_seed = args[2];
+                    int e_tap = int.Parse(args[3]);
+                    EncryptImage(imagefile, e_seed, e_tap);
+                    break;
+
+                case "DecryptImage":
+                    if (args.Length != 4)
+                        throw new ArgumentException("Usage for 'DecryptImage': DecryptImage <imagefile> <seed> <tap>\n");
+                    string d_imagefile = args[1];
+                    string d_seed = args[2];
+                    int d_tap = int.Parse(args[3]);
+                    DecryptImage(d_imagefile, d_seed, d_tap);
                     break;
 
                 // Other cases will be implemented later.
@@ -161,8 +176,8 @@ class Program {
         return true;
     }
 
-//accept plaintext in bits; perform an XOR operation with the 
-//retrieved keystream from the file; and return a set of encrypted bits (ciphertext).
+    //accept plaintext in bits; perform an XOR operation with the 
+    //retrieved keystream from the file; and return a set of encrypted bits (ciphertext).
     static void Encrypt(string plaintext) {
     if (!IsBinaryString(plaintext))
         throw new ArgumentException("Plaintext must be a binary string");
@@ -212,8 +227,6 @@ class Program {
             ciphertext += encryptedBit;
         }
     }
-
-
     // Output the ciphertext
     Console.WriteLine($"The ciphertext is: {ciphertext}");
     }
@@ -323,6 +336,142 @@ class Program {
         }
 }
 
+//Given an image with a seed and a tap position , generate a row- encrypted image
+    static void EncryptImage(string imagePath, string seed, int tap) {
+        // Validate input
+        if (!File.Exists(imagePath))
+            throw new FileNotFoundException($"Image file not found: {imagePath}");
 
+        if (!IsBinaryString(seed))
+            throw new ArgumentException("Seed must be a binary string");
+
+        if (tap <= 0)
+            throw new ArgumentException("Tap must be a positive integer");
+
+        // Load  image as a bitmap
+        using var originalBitmap = SKBitmap.Decode(imagePath);
+        if (originalBitmap == null)
+            throw new Exception("Failed to load image.");
+
+        var encryptedBitmap = new SKBitmap(originalBitmap.Width, originalBitmap.Height);
+        string currentSeed = seed;
+
+        for (int y = 0; y < originalBitmap.Height; y++) {
+            for (int x = 0; x < originalBitmap.Width; x++) {
+                SKColor pixelColor = originalBitmap.GetPixel(x, y);  // Get each pixel color
+
+                // Generate random 8-bit integers for R, G, B using the LFSR
+                byte randomRed = GenerateRandomByte(ref currentSeed, tap);
+                byte randomGreen = GenerateRandomByte(ref currentSeed, tap);
+                byte randomBlue = GenerateRandomByte(ref currentSeed, tap);
+
+                // XOR each color component with the corresponding random number
+                byte newRed = (byte)(pixelColor.Red ^ randomRed);
+                byte newGreen = (byte)(pixelColor.Green ^ randomGreen);
+                byte newBlue = (byte)(pixelColor.Blue ^ randomBlue);
+
+                SKColor encryptedColor = new SKColor(newRed, newGreen, newBlue, pixelColor.Alpha);
+                encryptedBitmap.SetPixel(x, y, encryptedColor);
+            }
+        }
+
+        // Save the encrypted image
+        string directory = Path.GetDirectoryName(imagePath) ?? ".";
+        string originalFileName = Path.GetFileNameWithoutExtension(imagePath);
+        string encryptedFileName = $"{originalFileName}ENCRYPTED{Path.GetExtension(imagePath)}";
+        string encryptedFilePath = Path.Combine(directory, encryptedFileName);
+
+        using var image = SKImage.FromBitmap(encryptedBitmap);
+        using var data = image.Encode();
+        File.WriteAllBytes(encryptedFilePath, data.ToArray());
+
+        Console.WriteLine($"Encrypted image saved as: {encryptedFileName}");
+    }
+
+    // Generate a random 8-bit unsigned integer using LFSR
+    static byte GenerateRandomByte(ref string seed, int tap) {
+        byte randomByte = 0;
+
+        // for 8 bits
+        for (int i = 0; i < 8; i++) {
+            int tapIndex = seed.Length - tap;
+            char tapBit = seed[tapIndex];
+            char newBit = (seed[^1] == tapBit) ? '0' : '1'; // XOR operation
+
+            seed = seed.Substring(1) + newBit;
+
+            randomByte = (byte)((randomByte << 1) | (newBit - '0'));
+        }
+        return randomByte;
+    }
+
+
+    // remove the wrod "ENCRYPTED" from the file name
+    static string GetRealImageFileName(string imgFile){
+        // Extract original file name without the extension
+        string imgDir = Path.GetDirectoryName(imgFile) ?? ".";
+        string originalFileName = Path.GetFileNameWithoutExtension(imgFile);
+        string extension = Path.GetExtension(imgFile);
+
+        // If the filename contains "Encrypted", remove it
+        if (originalFileName.EndsWith("Encrypted", StringComparison.OrdinalIgnoreCase))
+            originalFileName = originalFileName.Substring(0, originalFileName.Length - "Encrypted".Length);
+
+        // Generate output filename
+        string outputFileName = Path.Combine(imgDir, $"{originalFileName}NEW{extension}");
+
+        return outputFileName;
+
+    }
+
+    static void DecryptImage(string imgFile, string seed, int tap) {
+        // Validate input
+        if (!File.Exists(imgFile))
+            throw new FileNotFoundException($"Encrypted image file not found: {imgFile}");
+
+        if (!IsBinaryString(seed))
+            throw new ArgumentException("Seed must be a binary string (only 0s and 1s).");
+
+        if (tap <= 0 || tap > seed.Length)
+            throw new ArgumentException("Tap must be a positive integer within the seed's bit length.");
+
+        // Load image as a bitmap
+        using var encryptedBitmap = SKBitmap.Decode(imgFile);
+        if (encryptedBitmap == null)
+            throw new Exception("Failed to load encrypted image.");
+
+
+        var decryptedBitmap = new SKBitmap(encryptedBitmap.Width, encryptedBitmap.Height);
+        string currentSeed = seed;
+
+        for (int y = 0; y < encryptedBitmap.Height; y++)  {
+            for (int x = 0; x < encryptedBitmap.Width; x++) {
+                
+                SKColor encryptedColor = encryptedBitmap.GetPixel(x, y); // Get each pixel color
+
+                // Generate random 8-bit integers for R, G, B using the LFSR
+                byte randomRed = GenerateRandomByte(ref currentSeed, tap);
+                byte randomGreen = GenerateRandomByte(ref currentSeed, tap);
+                byte randomBlue = GenerateRandomByte(ref currentSeed, tap);
+
+                // XOR each encrypted color component with the corresponding random number
+                byte originalRed = (byte)(encryptedColor.Red ^ randomRed);
+                byte originalGreen = (byte)(encryptedColor.Green ^ randomGreen);
+                byte originalBlue = (byte)(encryptedColor.Blue ^ randomBlue);
+
+                SKColor originalColor = new SKColor(originalRed, originalGreen, originalBlue, encryptedColor.Alpha);
+                decryptedBitmap.SetPixel(x, y, originalColor);
+            }
+        }
+
+        // get file name without the 'ENCRYPTED' 
+        string outputFileName = GetRealImageFileName(imgFile);
+
+        // Save the decrypted image
+        using var image = SKImage.FromBitmap(decryptedBitmap);
+        using var data = image.Encode();
+        File.WriteAllBytes(outputFileName, data.ToArray());
+
+    }
 
 }

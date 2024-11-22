@@ -13,3 +13,10 @@
 /Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.pdb
 /Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.genruntimeconfig.cache
 /Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/ref/Project3_ConosleApp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/SkiaSharp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/runtimes/osx/native/libSkiaSharp.dylib
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/runtimes/win-arm64/native/libSkiaSharp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/runtimes/win-x64/native/libSkiaSharp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/bin/Debug/net8.0/runtimes/win-x86/native/libSkiaSharp.dll
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3_ConosleApp.csproj.AssemblyReference.cache
+/Users/Milana/IdeaProjects/CSCI251_COPADS/CSCI-251-COPADS/Project3_ConosleApp/obj/Debug/net8.0/Project3.4716D473.Up2Date
